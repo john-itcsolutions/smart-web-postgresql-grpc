@@ -1,0 +1,14 @@
+secretGenerator:
+- name: itcsa-postgres-key
+  literals:
+  - username=postgres
+  - password=master-password
+  - database=general
+  - replicaPassword=replica-password
+- name: itcsa-smartweb-test-key
+  literals:
+  - username=postgres
+  - password=master-password
+  - database=smartweb_test
+  - replicaPassword=replica-password
+

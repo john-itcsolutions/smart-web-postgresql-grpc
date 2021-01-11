@@ -1,0 +1,153 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-redis
+  labels:
+    type: local
+spec:
+  storageClassName: "standard"
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/disk/data-redis"
+  nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            -  "database"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-redis
+  labels:
+    type: local
+spec:
+  storageClassName: "standard"
+  capacity:
+    storage: 53Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/disk/config-redis"
+  nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            -  "database"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  type: NodePort
+  selector:
+    app: redis
+  ports:
+  - name: redis
+    protocol: TCP
+    port: 6379
+    targetPort: 6379
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-claim
+spec:
+  storageClassName: "standard"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-claim
+spec:
+  storageClassName: "standard"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 53Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        imagePullPolicy: IfNotPresent
+        image: localhost:32000/redis:5.0.4
+        env:
+          - name: GET_HOSTS_FROM
+            value: dns
+          - name: CONFIG_FILE
+            value: /etc/config/redis.conf
+          - name: POSTGRES_HOST
+            value: postgres
+          - name: POSTGRES_PORT
+            value: postgres
+          - name: POSTGRES_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: itcsa-postgres-key-6k7ggg4fcd
+                key: database
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: itcsa-postgres-key-6k7ggg4fcd
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: itcsa-postgres-key-6k7ggg4fcd
+                key: password
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            cpu: "0.1"
+        volumeMounts:
+        - mountPath: /redis-master-data
+          name: data-redis
+        - mountPath: /redis-master
+          name: config-redis
+      volumes:
+        - name: data-redis
+          persistentVolumeClaim:
+            claimName: redis-claim
+        - name: config-redis
+          persistentVolumeClaim:
+            claimName: config-claim
+      nodeSelector:
+        nodetype: database
+

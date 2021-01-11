@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smart-web
+  template:
+    metadata:
+      labels:
+        app: smart-web
+    spec:
+      containers:
+      - name: smart-web
+        image: localhost:32000/smart-web:87
+        ports:
+        - containerPort: 8001
+      nodeSelector:
+        nodetype: database
