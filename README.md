@@ -306,7 +306,9 @@ Also remember to `multipass restart <node-name1> [<node-name2> .. [ .. ]]` from 
 
 On microk8s you will need to have available, and allow for, 16GB of RAM at least, and 4 cpus in your 'kubeflow' virtual machine.
 
-Any compute assistance you can obtain from extra gpu & RAM (NVIDIA standard CUDA graphics cards), is valuable.
+Any compute assistance you can obtain from extra gpu & RAM (NVIDIA standard CUDA graphics cards), is valuable. To enable NVIDIA CUDA support:
+
+`microk8s enable gpu`
 
 ##     On kubeflow node:
 
