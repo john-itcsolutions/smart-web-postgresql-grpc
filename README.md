@@ -468,7 +468,7 @@ Next, move to a primary node terminal:
 
 `cd shared/../smart-web-postgresql-grpc/app/smart-web`
 
-Now, you need to ensure the image tags in the .yml files you are about to build from are in sync with the actual last image tag you built (+1). This comment always applies to smart-web  Docker-built images, as you progress. This means you have to "bump" along the image tags in both the tag given for the Dockerfile build target, and the kubernetes .yml file that references that image.
+Now, you need to ensure the image tags in the .yml files you are about to build from are in sync with the actual last image tag you built (+1). This comment always applies to smart-web  Docker-built images, as you progress. This means you have to "bump" along the image tags in both the tag given for the Dockerfile build target, and the kubernetes smart-web.yml file that references that image.
 
 `microk8s kubectl apply -f smart-web.yml`
 
