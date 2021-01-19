@@ -157,10 +157,6 @@ FROM HOST TERMINAL: clone the repo to your working directory
 
 `cd smart-web-postgresql-grpc`
 
-Please note that we have added a folder called "models" in root of python-grpc-adenine module.
-
-You will have to do the same in your local copies.
-
 ______________________________________________________________________________
 
 ## Preliminaries:
