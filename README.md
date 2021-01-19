@@ -1,7 +1,7 @@
 ## INTRODUCTION:
 
 # smart-web-postgresql-grpc
-Project based on Arianit Uka's postgres-statefulset merged with Cyber Republic's Elastos Smartweb gRPC-based Service and SQLAlchemy client.
+Project based on Arianit Uka's postgres-statefulset merged with Cyber Republic's Elastos Smartweb gRPC-based Service and SQLAlchemy.
 
 To tackle a full Kubernetes installation, ideally you would need a 32 GB RAM; 250 GB SSD; + HDD: PC (x86_64). eg an Extreme Gaming Computer. If you intend to include Machine Learning/AI capabilities, your Kubeflow installation will go much more easily with an 8 core Host rather than a 4 core one.
 
