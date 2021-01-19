@@ -29,11 +29,7 @@ https://github.com/cyber-republic/elastos-smartweb-service  (smartweb-server, pr
 
 and
 
-https://github.com/cyber-republic/python-grpc-adenine  (smartweb-client, database query client/server with Python. Elastos & ITCSA use SQLAlchemy)
-
-and
-
-https://pypi.org/project/sqlacodegen/#modal-close (inside smart-client; sub-module generates models from existing postgres database tables)
+https://github.com/cyber-republic/python-grpc-adenine  (smartweb-client, database query client with Python)
 
 and
 
