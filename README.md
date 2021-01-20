@@ -129,13 +129,11 @@ Check status of each node with `microk8s status --wait-ready`. If all good, in p
 
 Recheck microk8s status on every node.
 
-Next we need to label the nodes. On primary:
+Next we need to label the database node, to ensure we can "taint" the other nodes, to prevent pods from running elsewhere. 
 
-`microk8s kubectl label nodes primary nodetype=primary`
+On primary:
 
 `microk8s kubectl label nodes database nodetype=database`
-
-`microk8s kubectl label nodes kubeflow nodetype=kubeflow`
 
 Now in each node we require a shared directory to mount your host repo directory into, and to give general access to files on the Host.
 
