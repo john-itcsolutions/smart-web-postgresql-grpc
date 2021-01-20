@@ -191,13 +191,13 @@ Then:
 
 `docker tag redis:5.0.4 10.184.36.93:32000/redis:5.0.4`
 
-`docker tag postgres-10:14 10.184.36.93:32000/postgres:10.14`
+`docker tag postgis/postgis 10.184.36.93:32000/postgis/postgis:1`
 
 Now push the images to the microk8s registry:
 
 `docker push 10.184.36.93:32000/redis:5.0.4`
 
-`docker push 10.184.36.93:32000/postgres:10.14`
+`docker push 10.184.36.93:32000/postgis/postgis:1`
 
 (Remember to change the above Ip Addresses to match your own node address for master node!)
 
