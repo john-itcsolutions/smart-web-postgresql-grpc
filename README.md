@@ -165,7 +165,7 @@ IN HOST TERMINAL:
  
  `docker pull redis:5.0.4`
 
- `docker pull postgres-10:14`
+ `docker pull postgis/postgis`
  
 Issue `multipass list` from host and note Ip Address of the primary node.
  
