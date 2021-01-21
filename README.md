@@ -117,7 +117,7 @@ When the database node has joined, repeat for kubeflow node.
 
 Then (on primary):
 
-`microk8s enable dashboard ingress istio metallb metrics-server registry storage`
+`microk8s enable dashboard gpu ingress istio metallb kubeflow metrics-server registry storage`
 
 .. at the beginning of metallb enablement you need to respond to input request with `192.168.0.0/32`.
 
@@ -303,20 +303,6 @@ Also remember to `multipass restart <node-name1> [<node-name2> .. [ .. ]]` from 
 ## KUBEFLOW and Machine Learning (Artificial Intelligence or Statistical Learning)
 
 On microk8s you will need to have available, and allow for, 16GB of RAM at least, and 4 cpus in your 'kubeflow' virtual machine.
-
-Any compute assistance you can obtain from extra gpu & RAM (NVIDIA standard CUDA graphics cards), is valuable. To enable NVIDIA CUDA support:
-
-`microk8s enable gpu`
-
-##     On kubeflow node:
-
-`microk8s enable kubeflow`
-
-OR, if system reports lower memory to microk8s:
-
-`KUBEFLOW_IGNORE_MIN_MEM=true microk8s.enable kubeflow`
-
-The full enablement process takes MANY minutes on a 32GB 4 core Host. An 8 core machine is actually recommended.
 
 Good luck! (see either https://statlearning.com/ - or -  https://dokumen.pub/introduction-to-statistical-learning-7th-printingnbsped-9781461471370-9781461471387-2013936251.html -  download "An Introduction to Statistical Learning"; Gareth James et al.)
 
