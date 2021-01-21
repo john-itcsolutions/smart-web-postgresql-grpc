@@ -175,7 +175,7 @@ Issue `multipass list` from host and note Ip Address of the primary node.
  
 `{`
 
-`  insecure-registries : [10.184.36.93:32000,`
+`  insecure-registries : [10.184.36.90:32000,`
 
 `                           ]`
 
@@ -189,15 +189,15 @@ Then:
 
 `sudo systemctl restart docker`
 
-`docker tag redis:5.0.4 10.184.36.93:32000/redis:5.0.4`
+`docker tag redis:5.0.4 10.184.36.90:32000/redis:5.0.4`
 
-`docker tag postgis/postgis 10.184.36.93:32000/postgis/postgis:1`
+`docker tag postgis/postgis 10.184.36.90:32000/postgis/postgis:1`
 
 Now push the images to the microk8s registry:
 
-`docker push 10.184.36.93:32000/redis:5.0.4`
+`docker push 10.184.36.90:32000/redis:5.0.4`
 
-`docker push 10.184.36.93:32000/postgis/postgis:1`
+`docker push 10.184.36.90:32000/postgis/postgis:1`
 
 (Remember to change the above Ip Addresses to match your own node address for master node!)
 
@@ -444,11 +444,11 @@ In a Host terminal,
 
 `cd path/to/smart-web-postgresql-grpc/app/smart-web`
 
-`docker build -t 10.184.36.93:32000/smart-web:1 .`
+`docker build -t 10.184.36.90:32000/smart-web:1 .`
 
 .. where the IP Address needs to be appropriate to your installation .. check multipass list for the primary node's address.
 
-`docker push 10.184.36.93:32000/smart-web:1`
+`docker push 10.184.36.90:32000/smart-web:1`
 
 Next, move to a primary node terminal:
 
